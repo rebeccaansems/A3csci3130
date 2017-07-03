@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="pBusiness_prompt">Choose a primary business</string>
+
+    <string-array name="pBusiness_array">
+        <item>Fisher</item>
+        <item>Distributor</item>
+        <item>Processor</item>
+        <item>Fish Monger</item>
+    </string-array>
+
+</resources>
