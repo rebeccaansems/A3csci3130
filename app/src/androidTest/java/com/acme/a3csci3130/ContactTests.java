@@ -62,6 +62,9 @@ public class ContactTests {
         }
     }
 
+    /** Tests that a new contact is created with given information
+     *
+     */
     @Test
     public void contactCreated(){
         createContacts(false);
@@ -94,8 +97,11 @@ public class ContactTests {
         Assert.assertEquals(newContact.province, MainActivity.firebaseAdapter.getItem(index).province);
     }
 
+    /** Edits the first item in the main list and tests if
+     * that item was edited with given information
+     */
     @Test
-    public void contactEdited() throws InterruptedException {
+    public void contactEdited() {
         editedContact = new Contact(MainActivity.firebaseAdapter.getItem(0).uid,
                 2017, "Fish and Stuff", "Processor", "123 Boat Street", "NB");
 
@@ -128,9 +134,13 @@ public class ContactTests {
         Assert.assertEquals(editedContact.province, MainActivity.firebaseAdapter.getItem(0).province);
     }
 
+    /** Removes the first item in the main list and sees if that item was removed
+     *
+     */
     @Test
     public void contactRemoved(){
         int currentNumberContacts = MainActivity.firebaseAdapter.getCount();
+        String currentUID = MainActivity.firebaseAdapter.getItem(0).uid;
 
         onData(anything())
                 .inAdapterView(withId(R.id.listView))
@@ -140,5 +150,6 @@ public class ContactTests {
         onView(withId(R.id.b_Delete)).perform(click());
 
         Assert.assertEquals(currentNumberContacts-1, MainActivity.firebaseAdapter.getCount());
+        Assert.assertNotEquals(currentUID, MainActivity.firebaseAdapter.getItem(0).uid);
     }
 }
