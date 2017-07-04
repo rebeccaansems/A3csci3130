@@ -46,7 +46,7 @@ import static org.junit.Assert.*;
 @RunWith(AndroidJUnit4.class)
 @SmallTest
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class ExampleInstrumentedTest {
+public class ContactTests {
 
     private Contact newContact, editedContact;
     private MyApplicationData appState;
