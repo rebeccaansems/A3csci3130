@@ -11,7 +11,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class MyApplicationData extends Application {
 
-    public DatabaseReference firebaseReference;
-    public FirebaseDatabase firebaseDBInstance;
+    public static DatabaseReference firebaseReference;
+    public static FirebaseDatabase firebaseDBInstance;
 
 }

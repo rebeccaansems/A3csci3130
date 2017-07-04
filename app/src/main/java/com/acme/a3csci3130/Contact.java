@@ -15,7 +15,7 @@ import java.util.Map;
 public class Contact implements Serializable {
 
     public  String uid;
-    int businessNum;
+    public int businessNum;
     public  String name;
     public  String primaryBusiness;
     public  String address;

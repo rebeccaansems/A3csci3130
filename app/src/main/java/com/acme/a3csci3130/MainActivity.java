@@ -16,7 +16,7 @@ public class MainActivity extends Activity {
 
 
     private ListView contactListView;
-    private FirebaseListAdapter<Contact> firebaseAdapter;
+    public static FirebaseListAdapter<Contact> firebaseAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +65,5 @@ public class MainActivity extends Activity {
         intent.putExtra("Contact", person);
         startActivity(intent);
     }
-
-
 
 }
