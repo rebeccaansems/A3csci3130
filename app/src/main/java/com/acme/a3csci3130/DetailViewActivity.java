@@ -7,6 +7,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+/** Screen that allows editing or deletion of an already
+ * created contact item
+ */
 public class DetailViewActivity extends Activity {
 
     private EditText businessNumField, nameField, addressField;
@@ -38,6 +41,12 @@ public class DetailViewActivity extends Activity {
         }
     }
 
+    /** Gets index of a spinner where a certain string is
+     *
+     * @param spinner spinner list
+     * @param myString string to find in spinner
+     * @return location of string in spinner list
+     */
     private int getIndex(Spinner spinner, String myString)
     {
         int index = 0;
@@ -51,6 +60,10 @@ public class DetailViewActivity extends Activity {
         return index;
     }
 
+    /** Gets information from various fields and updates firebase item
+     * with information
+     * @param v current view
+     */
     public void updateContact(View v){
         String personID = receivedPersonInfo.uid;
         try{
@@ -70,6 +83,10 @@ public class DetailViewActivity extends Activity {
         finish();
     }
 
+    /** Deletes the currently opened contact
+     *
+     * @param v current view
+     */
     public void eraseContact(View v)
     {
         String personID = receivedPersonInfo.uid;

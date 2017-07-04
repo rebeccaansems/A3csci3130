@@ -10,6 +10,9 @@ import android.widget.Spinner;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+/** Activity that allows the user to create a new
+ * contact
+ */
 public class CreateContactAcitivity extends Activity {
 
     private Button submitButton;
@@ -33,6 +36,9 @@ public class CreateContactAcitivity extends Activity {
         provinceSpinner = (Spinner) findViewById(R.id.provinceTerritory);
     }
 
+    /** Gathers information from the various fields, creates new contact
+     * and sends new contact to firebase. Returns to main screen.
+      */
     public void submitInfoButton(View v) {
         //each entry needs a unique ID
         String personID = appState.firebaseReference.push().getKey();

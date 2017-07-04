@@ -9,15 +9,21 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseListAdapter;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+/** Sets up the main list view of contacts
+ * and allows user to click on list item and
+ * brings up details page
+ */
 public class MainActivity extends Activity {
-
 
     private ListView contactListView;
     public static FirebaseListAdapter<Contact> firebaseAdapter;
 
+    /** Creates the main list
+     *
+     * @param savedInstanceState current bundle
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,12 +59,20 @@ public class MainActivity extends Activity {
         });
     }
 
+    /** Allows user to create a new contact item
+     *
+     * @param v current View
+     */
     public void createContactButton(View v)
     {
         Intent intent=new Intent(this, CreateContactAcitivity.class);
         startActivity(intent);
     }
 
+    /** Shows the user the details on contact item
+     *
+     * @param person contact to allow editing/deleting
+     */
     private void showDetailView(Contact person)
     {
         Intent intent = new Intent(this, DetailViewActivity.class);
