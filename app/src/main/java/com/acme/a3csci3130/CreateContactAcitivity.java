@@ -36,15 +36,19 @@ public class CreateContactAcitivity extends Activity {
     public void submitInfoButton(View v) {
         //each entry needs a unique ID
         String personID = appState.firebaseReference.push().getKey();
-        int businessNum = Integer.parseInt(businessNumberField.getText().toString());
-        String name = nameField.getText().toString();
-        String primaryBusiness = primaryBusinessSpinner.getSelectedItem().toString();
-        String address = addressField.getText().toString();
-        String province = provinceSpinner.getSelectedItem().toString();
+        try{
+            int businessNum = Integer.parseInt(businessNumberField.getText().toString());
+            String name = nameField.getText().toString();
+            String primaryBusiness = primaryBusinessSpinner.getSelectedItem().toString();
+            String address = addressField.getText().toString();
+            String province = provinceSpinner.getSelectedItem().toString();
 
-        Contact person = new Contact(personID, businessNum, name, primaryBusiness, address, province);
+            Contact person = new Contact(personID, businessNum, name, primaryBusiness, address, province);
 
-        appState.firebaseReference.child(personID).setValue(person);
+            appState.firebaseReference.child(personID).setValue(person);
+        }
+        catch(NumberFormatException e){
+        }
 
         finish();
 
