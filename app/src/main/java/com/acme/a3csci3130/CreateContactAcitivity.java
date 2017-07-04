@@ -7,6 +7,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 public class CreateContactAcitivity extends Activity {
 
     private Button submitButton;
@@ -18,10 +21,11 @@ public class CreateContactAcitivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_contact_acitivity);
+
         //Get the app wide shared variables
         appState = ((MyApplicationData) getApplicationContext());
 
-        submitButton = (Button) findViewById(R.id.submitButton);
+        submitButton = (Button) findViewById(R.id.submitInfoButton);
         businessNumberField = (EditText) findViewById(R.id.businessNumber);
         nameField = (EditText) findViewById(R.id.name);
         primaryBusinessSpinner = (Spinner) findViewById(R.id.primaryBusiness);
@@ -32,7 +36,7 @@ public class CreateContactAcitivity extends Activity {
     public void submitInfoButton(View v) {
         //each entry needs a unique ID
         String personID = appState.firebaseReference.push().getKey();
-        String businessNum = businessNumberField.getText().toString();
+        int businessNum = Integer.parseInt(businessNumberField.getText().toString());
         String name = nameField.getText().toString();
         String primaryBusiness = primaryBusinessSpinner.getSelectedItem().toString();
         String address = addressField.getText().toString();
