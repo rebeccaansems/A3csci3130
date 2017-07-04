@@ -5,11 +5,15 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 
 public class DetailViewActivity extends Activity {
 
-    private EditText nameField;
-    Contact receivedPersonInfo;
+    private EditText businessNumField, nameField, addressField;
+    private Spinner pBusinessSpinner, provinceSpinner;
+
+    private Contact receivedPersonInfo;
+    private MyApplicationData appState;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,19 +21,60 @@ public class DetailViewActivity extends Activity {
         setContentView(R.layout.activity_detail_view);
         receivedPersonInfo = (Contact)getIntent().getSerializableExtra("Contact");
 
-        nameField = (EditText) findViewById(R.id.name);
+        appState = ((MyApplicationData) getApplicationContext());
+
+        businessNumField = (EditText) findViewById(R.id.t_editBusinessNumber);
+        nameField = (EditText) findViewById(R.id.t_editName);
+        pBusinessSpinner = (Spinner) findViewById(R.id.s_editPrimaryBusiness);
+        addressField = (EditText) findViewById(R.id.t_editAddress);
+        provinceSpinner = (Spinner) findViewById(R.id.s_editProvince);
 
         if(receivedPersonInfo != null){
+            businessNumField.setText(String.valueOf(receivedPersonInfo.businessNum));
             nameField.setText(receivedPersonInfo.name);
+            pBusinessSpinner.setSelection(getIndex(pBusinessSpinner, receivedPersonInfo.primaryBusiness));
+            addressField.setText(receivedPersonInfo.address);
+            provinceSpinner.setSelection(getIndex(provinceSpinner, receivedPersonInfo.province));
         }
     }
 
+    private int getIndex(Spinner spinner, String myString)
+    {
+        int index = 0;
+
+        for (int i=0;i<spinner.getCount();i++){
+            if (spinner.getItemAtPosition(i).toString().equalsIgnoreCase(myString)){
+                index = i;
+                break;
+            }
+        }
+        return index;
+    }
+
     public void updateContact(View v){
-        //TODO: Update contact funcionality
+        String personID = receivedPersonInfo.uid;
+        try{
+            int businessNum = Integer.parseInt(businessNumField.getText().toString());
+            String name = nameField.getText().toString();
+            String primaryBusiness = pBusinessSpinner.getSelectedItem().toString();
+            String address = addressField.getText().toString();
+            String province = provinceSpinner.getSelectedItem().toString();
+
+            Contact person = new Contact(personID, businessNum, name, primaryBusiness, address, province);
+
+            appState.firebaseReference.child(personID).setValue(person);
+        }
+        catch(NumberFormatException e){
+        }
+
+        finish();
     }
 
     public void eraseContact(View v)
     {
-        //TODO: Erase contact functionality
+        String personID = receivedPersonInfo.uid;
+        appState.firebaseReference.child(personID).removeValue();
+
+        finish();
     }
 }
